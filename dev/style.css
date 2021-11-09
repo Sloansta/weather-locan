@@ -1,0 +1,15 @@
+.title-bar {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+    align-items: center;
+}
+
+.title-text {
+    display: block;
+    margin: auto;
+    padding: auto;
+}
