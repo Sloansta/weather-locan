@@ -1,1 +1,2 @@
-# weather-locan
+# Weather-Local
+A simple weather application
