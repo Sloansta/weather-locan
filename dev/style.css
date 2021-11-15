@@ -8,8 +8,52 @@
     align-items: center;
 }
 
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .title-text {
     display: block;
     margin: auto;
     padding: auto;
+}
+
+.recent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    background-color: lightblue;
+    width: 300px;
+    height: 500px;
+    padding: 30px;
+    margin-right: 15px;
+}
+
+.five-day {
+    border: 15px;
+    border-radius: 15px;
+    color: white;
+}
+
+.current-weather {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    width: max-content;
+    height: fit-content;
+    background-color: cornflowerblue;
+    color: white;
+    border: 15px;
+    border-radius: 15px;
+}
+
+.weather-block {
+    padding: 30px;
+    margin: 15px;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 15px;
 }
