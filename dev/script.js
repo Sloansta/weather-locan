@@ -19,6 +19,7 @@ function getCurrentWeather() {
     });
 }
 
+// comment 
 function searchByBtn(btnName) {
     fetch('https://api.openweathermap.org/data/2.5/weather?q='+btnName+'&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
     .then(res => res.json())
