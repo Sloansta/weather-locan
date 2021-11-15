@@ -3,7 +3,8 @@ let searchBtn = document.getElementById('search-btn');
 let searchField = document.getElementById('city-search');
 let currentWeatherEl = document.querySelector('.current-weather');
 let fiveDayWeatherEl = document.querySelector('.five-day');
-let recentSearch = [];
+let recentSectionEl = document.querySelector('.recent');
+let recentSearch = JSON.parse(localStorage.getItem('recents')) || [];
 
 function getCurrentWeather() {
     fetch('http://api.openweathermap.org/data/2.5/weather?q='+searchField.value+'&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
@@ -11,15 +12,28 @@ function getCurrentWeather() {
     .then((data) => {
         console.log(data);
         displayData(data);
-        recentSearch.push(data.name);
-        getFiveDay();
+        saveToLocal(data.name);
+        getFiveDay(data.name);
     }).catch((err) => {
         console.error(err);
     });
 }
 
-function getFiveDay() {
-    fetch('http://api.openweathermap.org/data/2.5/forecast?q='+searchField.value+
+function searchByBtn(btnName) {
+    fetch('http://api.openweathermap.org/data/2.5/weather?q='+btnName+'&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
+    .then(res => res.json())
+    .then((data) => {
+        console.log(data);
+        displayData(data);
+        saveToLocal(data.name);
+        getFiveDay(data.name);
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
+function getFiveDay(location) {
+    fetch('http://api.openweathermap.org/data/2.5/forecast?q='+location+
     '&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
     .then(res => res.json())
     .then((data) => {
@@ -30,23 +44,18 @@ function getFiveDay() {
     });
 }
 
-function displayRecent(item) {
-    for(i in item) {
+function displayRecent() {
+    for(i in recentSearch) {
         let locationBtn = document.createElement('button');
-        locationBtn.classList = 'recent recent-btn';
-        locationBtn.value = recentSearch[i];
+        locationBtn.id = 'recent-btn';
+        locationBtn.textContent = recentSearch[i];
+        recentSectionEl.appendChild(locationBtn);
     }
-    saveToLocal();
 }
 
-function saveToLocal() {
+function saveToLocal(name) {
+    recentSearch.push(name);
     localStorage.setItem('recents', JSON.stringify(recentSearch));
-}
-
-function loadFromLocal() {
-    let local = localStorage.getItem('recents');
-    let arrItem = JSON.parse(local);
-    displayRecent(arrItem);
 }
 
 function displayData(data) {
@@ -70,8 +79,12 @@ function displayFiveDay(data) {
 
 searchBtn.addEventListener('click', () => {
     getCurrentWeather();
-    saveToLocal();
     //console.log(searchField.value)
 });
 
-//loadFromLocal();
+recentSectionEl.addEventListener('click', (e) => {
+    let btnName = e.target.textContent;
+    searchByBtn(btnName);
+})
+
+displayRecent();

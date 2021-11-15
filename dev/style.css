@@ -23,6 +23,7 @@ main {
 .recent {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
     justify-content: left;
     background-color: lightblue;
     width: 300px;
@@ -56,4 +57,13 @@ main {
     background-color: cornflowerblue;
     color: white;
     border-radius: 15px;
+}
+
+.recent-btn {
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 15px;
 }
