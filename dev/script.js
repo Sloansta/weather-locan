@@ -7,7 +7,7 @@ let recentSectionEl = document.querySelector('.recent');
 let recentSearch = JSON.parse(localStorage.getItem('recents')) || [];
 
 function getCurrentWeather() {
-    fetch('http://api.openweathermap.org/data/2.5/weather?q='+searchField.value+'&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q='+searchField.value+'&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
     .then(res => res.json())
     .then((data) => {
         console.log(data);
@@ -20,7 +20,7 @@ function getCurrentWeather() {
 }
 
 function searchByBtn(btnName) {
-    fetch('http://api.openweathermap.org/data/2.5/weather?q='+btnName+'&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q='+btnName+'&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
     .then(res => res.json())
     .then((data) => {
         console.log(data);
@@ -33,7 +33,7 @@ function searchByBtn(btnName) {
 }
 
 function getFiveDay(location) {
-    fetch('http://api.openweathermap.org/data/2.5/forecast?q='+location+
+    fetch('https://api.openweathermap.org/data/2.5/forecast?q='+location+
     '&units=imperial&appid=363f8748f69f4f1dd40ec328acffe4b7')
     .then(res => res.json())
     .then((data) => {
